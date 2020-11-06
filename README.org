@@ -1,0 +1,14 @@
+* My Manjarro Configuration
+
+** store dotfiles
+git init --bare $HOME/dotfiles
+
+alias dotfiles='/usr/bin/git --git-dir=$HOME/Manjaro-dotfiles --work-tree=$HOME'
+
+dotfiles config --local status.showUntrackedFiles no
+
+store some dotfiles...
+
+** migrate to work environment
+git config --global user.email "devinkin@163.com"
+git config --global user.name "devinkin"
