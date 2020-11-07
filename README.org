@@ -1,5 +1,84 @@
-* My Manjarro Configuration
+* Manjaro工作环境配置
+** 安装Manjaro系统
+   按默认分区方案，比较懒。
+** 换国内源
+   配置国内镜源
+   #+begin_src shell
+     sudo pacman-mirrors -i -c China -m rank
+   #+end_src
+   
+   设置archlinuxcn源，antergos源，arch4edu源：
+   #+begin_src shell
+     [archlinuxcn]
+     SigLevel = TrustAll
+     #中科大源
+     Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+     #清华源
+     Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 
+     [antergos]
+     SigLevel = TrustAll
+     Server = https://mirrors.tuna.tsinghua.edu.cn/antergos/$repo/$arch
+
+     [arch4edu]
+     SigLevel = TrustAll
+     Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch
+   #+end_src
+   
+   更新源列表
+   #+begin_src shell
+     sudo pacman-mirrors -g
+   #+end_src
+   
+   更新pacman数据库并全面更新系统
+   #+begin_src shell
+     sudo pacman -Syyu
+   #+end_src
+   
+   防止PGP签名错误
+   #+begin_src shell
+     sudo pacman -S archlinuxcn-keyring
+     sudo pacman -S antergos-keyring
+   #+end_src
+** 安装Google-Chrome
+   #+begin_src shell
+     sudo pacman -S google-chrome
+   #+end_src
+   
+   直接开启同步功能安装好所有的插件。
+** 安装qv2ray
+   安装qv2ray，科学上网使用。
+   #+begin_src shell
+     sudo pacman -S qv2ray v2ray
+     sudo pacman -S proxychains
+   #+end_src
+   
+   proxychains代理设置，编辑 ~/etc/proxychains.conf~ 
+   #+begin_src text
+     socks5  127.0.0.1 1089
+   #+end_src
+** 安装fish shell
+   安装fish shell
+   #+begin_src shell
+     sudo pacman -S fish
+     chsh -s /usr/bin/fish
+
+     proxychains curl -L https://get.oh-my.fish | fish
+   #+end_src
+   
+** install fcitx and rime
+   #+begin_src shell
+     sudo pacman -S fcitx-im #安裝全部fcitx組件
+     sudo pacman -S fcitx-rime #安裝rime
+     sudo pacman -S fcitx-configtool #安裝fcitx圖形管理工具
+   #+end_src
+   
+   enviroment
+   #+begin_src text
+     export GTK_IM_MODULE=fcitx
+     export QT_IM_MODULE=fcitx
+     export XMODIFIERS="@im=fcitx"
+   #+end_src
 ** store dotfiles
 git init --bare $HOME/dotfiles
 
@@ -12,3 +91,20 @@ store some dotfiles...
 ** migrate to work environment
 git config --global user.email "devinkin@163.com"
 git config --global user.name "devinkin"
+
+setup some git configuration
+ssh-keygen -t rsa
+
+
+alias dotfiles='/usr/bin/git --git-dir=$HOME/Manjaro-dotfiles --work-tree=$HOME'
+
+echo "Manjaro-dotfiles" >> ~/.gitignore
+
+clone the remote configuration
+git clone --bare git@github.com:DevinKin/Manjaro-dotfiles.git $HOME/Manjaro-dotfiles
+
+
+从裸存储库中将实际内容检出到$ HOME
+dotfiles checkout
+
+** clone
