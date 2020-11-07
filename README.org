@@ -64,47 +64,58 @@
      chsh -s /usr/bin/fish
 
      proxychains curl -L https://get.oh-my.fish | fish
+
+     omf install lambda
    #+end_src
    
-** install fcitx and rime
+** 安装输入法
+   安装fcitx和rime输入法
    #+begin_src shell
      sudo pacman -S fcitx-im #安裝全部fcitx組件
      sudo pacman -S fcitx-rime #安裝rime
      sudo pacman -S fcitx-configtool #安裝fcitx圖形管理工具
    #+end_src
    
-   enviroment
+   编辑 ~.xprofile~ 添加如下环境变量。 
    #+begin_src text
      export GTK_IM_MODULE=fcitx
      export QT_IM_MODULE=fcitx
      export XMODIFIERS="@im=fcitx"
    #+end_src
-** store dotfiles
-git init --bare $HOME/dotfiles
+** 存储 dotfiles
+   在虚拟机中，预装好自己的Manjaro工作环境配置，进行如下操作
+   #+begin_src shell
+     # 初始化一个空仓库路径
+     git init --bare $HOME/Manjaro-dotfiles
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/Manjaro-dotfiles --work-tree=$HOME'
+     # 使用别名管理dotfiles
+     alias dotfiles='/usr/bin/git --git-dir=$HOME/ --work-tree=$HOME'
 
-dotfiles config --local status.showUntrackedFiles no
+     # dotfiles status不显示尚未add的文件
+     dotfiles config --local status.showUntrackedFiles no
 
-store some dotfiles...
+     # 后续保存某些配置文件
+     dotfiles add .bashrc
+     dotfiles commit -m ".bashrc"
+     dotfiles pusn origin master
+   #+end_src
 
-** migrate to work environment
-git config --global user.email "devinkin@163.com"
-git config --global user.name "devinkin"
+** 将dotfiles迁移到工作电脑
+   #+begin_src shell
+     # 设置git提交的邮箱和姓名
+     git config --global user.email "devinkin@163.com"
+     git config --global user.name "devinkin"
 
-setup some git configuration
-ssh-keygen -t rsa
+     # 设置远程仓库的配置
+     ssh-keygen -t rsa
 
+     # 避免循环checkout问题
+     echo "Manjaro-dotfiles" >> ~/.gitignore
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/Manjaro-dotfiles --work-tree=$HOME'
+     # 将准备好的配置文件拉下来
+     git clone --bare git@github.com:DevinKin/Manjaro-dotfiles.git $HOME/Manjaro-dotfiles
 
-echo "Manjaro-dotfiles" >> ~/.gitignore
+     # 从空仓库中将实际的配置文件拉到$HOME
+     dotfiles checkout
+   #+end_src
 
-clone the remote configuration
-git clone --bare git@github.com:DevinKin/Manjaro-dotfiles.git $HOME/Manjaro-dotfiles
-
-
-从裸存储库中将实际内容检出到$ HOME
-dotfiles checkout
-
-** clone
