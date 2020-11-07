@@ -40,6 +40,11 @@
      sudo pacman -S archlinuxcn-keyring
      sudo pacman -S antergos-keyring
    #+end_src
+   
+   安装base-devel
+   #+begin_src shell
+     sudo pacman -S base-devel
+   #+end_src
 ** 安装Google-Chrome
    #+begin_src shell
      sudo pacman -S google-chrome
@@ -82,6 +87,56 @@
      export QT_IM_MODULE=fcitx
      export XMODIFIERS="@im=fcitx"
    #+end_src
+** 开发环境搭建
+*** Emacs
+    #+begin_src shell
+      # 拉取自己的emacs配置
+      git clone git@github.com:DevinKin/.emacs.d.git
+
+      # 拉取emacs的site-lisp
+      git clone https://github.com/manateelazycat/company-english-helper.git site-lisp/company-english-helper
+
+      git clone https://github.com/manateelazycat/emacs-application-framework.git site-lisp/emacs-application-framework
+
+      # 如果想要添加其他的site-lisp可以执行以下命令
+      git clone <repo link> site-lisp/<repo name>
+      git submodule add <repo link> site-lisp/<repo name>
+
+      # 安装emacs及emacs的相关依赖
+      sudo pacman -S yay
+      yay -S python-pyqt5 python-pyqt5-sip python-pyqtwebengine python-qrcode python-feedparser python-dbus python-pyinotify python-markdown nodejs aria2 libreoffice python-grip filebrowser-bin
+      sudo pacman -R python-pymupdf
+      pip uninstall fitz
+      pip install pymupdf
+
+      sudo pacman -S the_silver_searcher
+      sudo pacman -S emacs
+
+      # 克隆配置
+
+    #+end_src
+*** Clojure
+    安装Clojure相关开发环境
+    #+begin_src shell
+      sudo pacman -S jdk11-openjdk clojure rlwrap leiningen maven 
+
+      yay -S clojure-lsp
+    #+end_src
+*** Golang
+    安装Go
+    #+begin_src shell
+      sudo pacman -S go
+    #+end_src
+    
+    设置环境变量
+    #+begin_src text
+      export GO111MODULE=auto
+      export GOPROXY=https://goproxy.cn
+      export GOROOT=/usr/lib/go
+      export GOPATH=$HOME/go 
+      export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+    #+end_src
+*** Python
 ** 存储 dotfiles
    在虚拟机中，预装好自己的Manjaro工作环境配置，进行如下操作
    #+begin_src shell
