@@ -104,6 +104,8 @@
 
       # 安装emacs及emacs的相关依赖
       sudo pacman -S yay
+      yay --aururl "https://aur.tuna.tsinghua.edu.cn" --save
+      yay -P -g
       yay -S python-pyqt5 python-pyqt5-sip python-pyqtwebengine python-qrcode python-feedparser python-dbus python-pyinotify python-markdown nodejs aria2 libreoffice python-grip filebrowser-bin
       sudo pacman -R python-pymupdf
       pip uninstall fitz
@@ -123,9 +125,9 @@
       yay -S clojure-lsp
     #+end_src
 *** Golang
-    安装Go
+    安装Go，nodejs和unzip用于dap-go安装的依赖
     #+begin_src shell
-      sudo pacman -S go
+      sudo pacman -S go nodejs unzip
     #+end_src
     
     设置环境变量
@@ -136,7 +138,19 @@
       export GOPATH=$HOME/go 
       export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
     #+end_src
+    
+    安装go相关工具
+    #+begin_src shell
+      # 安装gopls，emacs补全使用
+      goget golang.org/x/tools/gopls@latest
+      # 安装dlv，golang debug工具
+      goget github.com/go-delve/delve/cmd/dlv
+    #+end_src
 *** Python
+    安装jedi-language-server
+    #+begin_src shell
+      pip install -U jedi-language-server
+    #+end_src
 ** 存储 dotfiles
    在虚拟机中，预装好自己的Manjaro工作环境配置，进行如下操作
    #+begin_src shell
