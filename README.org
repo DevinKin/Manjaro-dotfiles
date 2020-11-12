@@ -158,7 +158,7 @@
      git init --bare $HOME/Manjaro-dotfiles
 
      # 使用别名管理dotfiles
-     alias dotfiles='/usr/bin/git --git-dir=$HOME/ --work-tree=$HOME'
+     alias dotfiles='/usr/bin/git --git-dir=$HOME/Manjaro-dotfiles --work-tree=$HOME'
 
      # dotfiles status不显示尚未add的文件
      dotfiles config --local status.showUntrackedFiles no
