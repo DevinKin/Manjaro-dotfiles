@@ -73,6 +73,30 @@
      omf install lambda
    #+end_src
    
+** 将dotfiles迁移到工作电脑
+   #+begin_src shell
+     # 设置git提交的邮箱和姓名
+     git config --global user.email "devinkin@163.com"
+     git config --global user.name "devinkin"
+
+     # 设置远程仓库的配置
+     ssh-keygen -t rsa
+
+     # 避免循环checkout问题
+     echo "Manjaro-dotfiles" >> ~/.gitignore
+
+     # 将准备好的配置文件拉下来
+     git clone --bare git@github.com:DevinKin/Manjaro-dotfiles.git $HOME/Manjaro-dotfiles
+
+     # 使用别名管理dotfiles
+     alias dotfiles='/usr/bin/git --git-dir=$HOME/Manjaro-dotfiles --work-tree=$HOME'
+
+     # dotfiles status不显示尚未add的文件
+     dotfiles config --local status.showUntrackedFiles no
+
+     # 从空仓库中将实际的配置文件拉到$HOME
+     dotfiles checkout
+   #+end_src
 ** 安装输入法
    安装fcitx和rime输入法
    #+begin_src shell
@@ -114,7 +138,7 @@
       sudo pacman -S the_silver_searcher
       sudo pacman -S emacs
 
-      # 克隆配置
+      # 启动emacs
 
     #+end_src
 *** Clojure
@@ -147,9 +171,15 @@
       goget github.com/go-delve/delve/cmd/dlv
     #+end_src
 *** Python
-    安装jedi-language-server
+    安装dotnet-sdk-2.2
     #+begin_src shell
-      pip install -U jedi-language-server
+      # 安装dotnet sdk
+      yay -S dotnet-sdk-2.2 dotnet-runtime-2.2
+    #+end_src
+    
+    安装microsoft-python-language-server
+    #+begin_src shell
+      yay -S microsoft-python-language-server
     #+end_src
 ** 存储 dotfiles
    在虚拟机中，预装好自己的Manjaro工作环境配置，进行如下操作
@@ -169,22 +199,5 @@
      dotfiles pusn origin master
    #+end_src
 
-** 将dotfiles迁移到工作电脑
-   #+begin_src shell
-     # 设置git提交的邮箱和姓名
-     git config --global user.email "devinkin@163.com"
-     git config --global user.name "devinkin"
 
-     # 设置远程仓库的配置
-     ssh-keygen -t rsa
-
-     # 避免循环checkout问题
-     echo "Manjaro-dotfiles" >> ~/.gitignore
-
-     # 将准备好的配置文件拉下来
-     git clone --bare git@github.com:DevinKin/Manjaro-dotfiles.git $HOME/Manjaro-dotfiles
-
-     # 从空仓库中将实际的配置文件拉到$HOME
-     dotfiles checkout
-   #+end_src
-
+   
