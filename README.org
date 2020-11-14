@@ -51,6 +51,9 @@
    #+end_src
    
    直接开启同步功能安装好所有的插件。
+
+   若设置默认浏览器有问题，可以按该[[https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/][链接]]方式解决。
+
 ** 安装qv2ray
    安装qv2ray，科学上网使用。
    #+begin_src shell
