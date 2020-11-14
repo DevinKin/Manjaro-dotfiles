@@ -181,7 +181,43 @@
     #+begin_src shell
       yay -S microsoft-python-language-server
     #+end_src
-** 存储 dotfiles
+** 安装各种软件
+   #+begin_src shell
+     # 安装wps
+     sudo pacman -S wps-office-cn ttf-wps-fonts
+
+     # 安装网易云音乐
+     yay -S netease-cloud-music
+
+     # 安装deepin截图工具
+     yay -S deepin-screenshot gpaste
+     # 设置截图快捷键
+     # System Settings - Shortcuts - Custom Shortcuts - Edit - New - Global Shortcut - Command/URL - 命名为Screenshots
+     # 在Trigger添加：Ctrl+Alt+A
+     # 在Action添加：deepin-turbo-invoker --type=dtkwidget deepin-screenshot --icon
+     # 与原有的一个快捷键设置冲突，Reassign来确认新的设置。
+
+     # 安装微信
+     yay -S deepin-wine-wechat
+
+     # 安装tmux，使用教程可看下面的链接：http://louiszhai.github.io/2017/09/30/tmux/
+     yay -S tmux
+
+     # 安装百度网盘
+     yay -S baidunetdisk 
+   #+end_src
+** 修复小问题
+   启动时grub无法显示
+   #+begin_src shell
+     sudo vim /etc/default/grub
+     # 将下面属性修改为menu
+     GRUB_TIMEOUT_STYLE=menu
+
+     sudo update-grub
+   #+end_src
+   
+   如果出现闪屏的情况，可以去系统设置-工作空间行为-桌面特效-模糊，点击关闭。
+** 存储dotfiles
    在虚拟机中，预装好自己的Manjaro工作环境配置，进行如下操作
    #+begin_src shell
      # 初始化一个空仓库路径
