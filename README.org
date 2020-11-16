@@ -209,6 +209,21 @@
      # 安装百度网盘
      yay -S baidunetdisk 
    #+end_src
+** 笔记流配置
+   个人需求：能在pc，mobile进行同步，markdown格式存储，支持检索功能。
+   
+   实现方案：
+   - joplin：开源的笔记工具，支持云同步。
+   - 坚果云：免费同步笔记。
+   - typroa：编写markdown笔记的工具。
+     
+   安装上面三个软件
+   #+begin_src shell
+     sudo pacman -S nutstore typora joplin
+   #+end_src
+
+   joplin配置[[https://help.jianguoyun.com/?p=2064][WebDAV云同步]]
+
 ** 修复小问题
    启动时grub无法显示
    #+begin_src shell
@@ -240,3 +255,4 @@
 
 
    
+ 
