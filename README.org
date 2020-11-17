@@ -204,6 +204,7 @@
      yay -S deepin-wine-wechat
 
      # 安装tmux，使用教程可看下面的链接：http://louiszhai.github.io/2017/09/30/tmux/
+     sudo pacman -S xclip
      yay -S tmux
 
      # 安装百度网盘
