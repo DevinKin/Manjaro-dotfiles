@@ -9,9 +9,9 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # 设置 http 代理
-# export http=http://127.0.0.1:8889
-# export https=http://127.0.0.1:8889
+# export HTTP_PROXY=http://127.0.0.1:8889
+# export HTTPS_PROXY=http://127.0.0.1:8889
 
 # 或, 设置 socket 代理(clash)
-# export http_proxy=socks5://127.0.0.1:1089
-# export https_proxy=socks5://127.0.0.1:1089
+# export HTTP_PROXY=socks5://127.0.0.1:1089
+# export HTTPS_PROXY=socks5://127.0.0.1:1089
