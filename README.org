@@ -224,7 +224,8 @@
    #+end_src
 
    joplin配置[[https://help.jianguoyun.com/?p=2064][WebDAV云同步]]
-
+** KDE桌面美化
+   观看Yutube的这个 [[https://www.youtube.com/watch?v=qTF9Nmt3iXY&ab_channel=LinuxScoop][视频]] 
 ** 修复小问题
    启动时grub无法显示
    #+begin_src shell
