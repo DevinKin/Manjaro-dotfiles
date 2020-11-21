@@ -209,6 +209,10 @@
 
      # 安装百度网盘
      yay -S baidunetdisk 
+
+     # 安装向日葵远程连接客户端
+
+     yay -S sunlogin
    #+end_src
 *** 安装企业微信
     参考以下项目，使用docker运行企业微信。
