@@ -210,6 +210,32 @@
      # 安装百度网盘
      yay -S baidunetdisk 
    #+end_src
+*** 安装企业微信
+    参考以下项目，使用docker运行企业微信。
+    - [[https://github.com/BoringCat/docker-WXWork][docker-WXWork]]
+      
+    安装前置依赖，docker和docker-compose。
+    #+begin_src shell
+      yay -S docker-compose
+    #+end_src
+    
+    解决KDE桌面无法显示企业微信问题
+    #+begin_src shell
+      yay -S gnome-settings-daemon
+    #+end_src
+    
+    开机启动程序中添加如下设置：系统设置-开机和关机-自启动服务-添加如
+    下脚本，已经在dotfiles中存储。
+    #+begin_src shell
+      #!/usr/bin/bash
+
+      /usr/lib/gsd-xsettings &
+     #+end_src
+     
+    不过不知道为什么，会有一个小问题，在开机自启动程序中和fish shell中
+    运行 ~docker start wxwork~ 都无法正常运行docker的企业微信，需要在命令行中执行 ~bash~
+    然后再执行 ~docker start wxwork~ 。
+    
 ** 笔记流配置
    个人需求：能在pc，mobile进行同步，markdown格式存储，支持检索功能。
    
