@@ -1,18 +1,20 @@
 #!/usr/bin/env bb
-
 (ns outdated
-  (:require [clojure.edn :as edn]
-            [clojure.java.shell :refer [sh]]
-            [clojure.string :as str]))
+  (:require
+   [clojure.edn :as edn]
+   [clojure.java.shell :refer [sh]]
+   [clojure.string :as str]))
 
 (def deps (-> (slurp (or (first *command-line-args*)
-                       "deps.edn"))
-            edn/read-string
-            :deps))
+                         "deps.edn"))
+              edn/read-string
+              (#(get-in % (if (nil? (second *command-line-args*))
+                            :deps
+                            [:aliases (keyword (second *command-line-args*)) :extra-deps])))))
 
 (def with-release (zipmap (keys deps)
-                    (map #(assoc % :mvn/version "RELEASE")
-                      (vals deps))))
+                          (map #(assoc % :mvn/version "RELEASE")
+                               (vals deps))))
 
 (defn deps->versions [deps]
   (let [res (sh "clojure" "-Sdeps" (str {:deps deps}) "-Stree")
@@ -25,11 +27,9 @@
       {}
       deps)))
 
-
 (def version-map (deps->versions deps))
 
 (def new-version-map (deps->versions with-release))
-
 
 (doseq [[dep version] version-map
         :let [new-version (get new-version-map dep)]
