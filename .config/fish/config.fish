@@ -7,7 +7,10 @@
     set -Ux GOPROXY https://goproxy.cn
     set -Ux GOROOT /usr/lib/go
     set -Ux GOPATH $HOME/go 
-    set PATH $PATH:$GOROOT/bin:$GOPATH/bin
+    contains $GOROOT/bin $PATH
+    or set -a PATH $GOROOT/bin
+    contains $GOPATH/bin $PATH
+    or set -a PATH $GOPATH/bin
 
     # 设置 http 代理
     set -Ux HTTP_PROXY http://127.0.0.1:8889
@@ -20,4 +23,9 @@
 
     # npm without sudo https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
     set -Ux USER_NPM_GLOBAL $HOME/.npm-global
-    set PATH $PATH:$USER_NPM_GLOBAL/bin
+    contains $USER_NPM_GLOBAL/bin $PATH
+    or set -a PATH $USER_NPM_GLOBAL/bin
+
+    # some babashka script
+    contains $HOME/Devinkin/babashka-script $PATH
+    or set -a PATH $HOME/Devinkin/babashka-script
